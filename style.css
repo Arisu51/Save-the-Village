@@ -1,0 +1,18 @@
+#game{
+    margin: auto;
+    width: 600px;
+    height: 600px;
+    background: rgb(70, 228, 240);
+}
+.pixil{
+    position: absolute;
+    width: 32px;
+    height: 29px;
+    background: red;
+    overflow: hidden;
+    top: 579px;
+}
+.spritePlayer{
+    transform: translateX(-128px);
+    image-rendering: pixelated;
+}

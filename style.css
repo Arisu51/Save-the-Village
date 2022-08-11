@@ -3,17 +3,15 @@
     width: 600px;
     height: 600px;
     background: rgb(70, 228, 240);
-}
-.pixil{
-    position: absolute;
-    width: 48px;
-    height: 43.5px;
-    background: red;
     overflow: hidden;
-    top: 565px;
 }
-.spritePlayer{
-    width: 576px;
-    transform: translateX(-192px);
+#container{
+    position: relative;
+}
+#player{
+    position: absolute;
+    height: 40px;
+    background: red;
+    top: 560px;
     image-rendering: pixelated;
 }

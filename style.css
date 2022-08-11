@@ -14,10 +14,28 @@
     top: 550px;
     image-rendering: pixelated;
 }
+@keyframes jump{
+    0% {
+      transform: translateY(0);
+    }
+  
+    100% {
+        transform: translateY(-110px);
+    }
+}
+.jump{
+    animation: jump 2s;
+}
 .platform {
     position: absolute;
     background: rgb(7, 160, 28);
     height: 10px;
+}
+.bridge {
+    position: absolute;
+    background: rgb(131, 63, 0);
+    height: 6px;
+    width: 600px;
 }
 .ground{
     width: 600px;
@@ -27,8 +45,8 @@
     width: 60px;
 }
 .M{
-    width: 360px;
-    left: 120px;
+    width: 320px;
+    left: 140px;
 }
 .E{
     left:540px

@@ -11,7 +11,37 @@
 #player{
     position: absolute;
     height: 40px;
-    background: red;
-    top: 560px;
+    top: 550px;
     image-rendering: pixelated;
+}
+.platform {
+    position: absolute;
+    background: rgb(7, 160, 28);
+    height: 10px;
+}
+.ground{
+    width: 600px;
+    top: 590px;
+}
+.L{
+    width: 60px;
+}
+.M{
+    width: 360px;
+    left: 120px;
+}
+.E{
+    left:540px
+}
+.two{
+    top: 480px;
+}
+.tree{
+    top: 370px;
+}
+.four{
+    top: 260px;
+}
+.five{
+    top: 150px;
 }

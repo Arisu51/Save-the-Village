@@ -6,13 +6,14 @@
 }
 .pixil{
     position: absolute;
-    width: 32px;
-    height: 29px;
+    width: 48px;
+    height: 43.5px;
     background: red;
     overflow: hidden;
-    top: 579px;
+    top: 565px;
 }
 .spritePlayer{
-    transform: translateX(-128px);
+    width: 576px;
+    transform: translateX(-192px);
     image-rendering: pixelated;
 }

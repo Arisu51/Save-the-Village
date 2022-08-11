@@ -8,34 +8,58 @@ var xPlayerPos;
 var dx;
 var frames;
 
+//sprites
+var spritePlayer;
+
 function inicia() {
     dx = 0;
     xPlayerPos = 0;
     player = document.getElementById('player');
     document.addEventListener('keydown', mover);
     document.addEventListener('keydown', parar);
-    frames = setInterval(game, 20);
+    game();
+}
+
+//movimentação
+
+function control() {
+    player.style.left = xPlayerPos + 'px';
 }
 
 function mover() {
-    var tecla = event.keyCode;
-    if (tecla == 37) {
-        dx = -1;
-    } else if (tecla == 39) {
-        dx = 1;
+    tecla = event.keyCode;
+    switch (tecla) {
+        case 37:
+            dx = -1;
+            break;
+        case 39:
+            dx = 1;
+            break;
+        default:
+            break;
     }
+    xPlayerPos += dx*3;
 }
 function parar() {
-    var tecla = event.keyCode;
-    if (tecla == 37) {
-        dx = 0;
-    } else if (tecla == 39) {
-        dx = 0;
+    tecla = event.keyCode;
+    switch (tecla) {
+        case 37:
+            dx = -1;
+            break;
+        case 39:
+            dx = 1;
+            break;
+        default:
+            break;
     }
+    xPlayerPos += dx*3;
 }
+
+//atualizador
+
 function game(){
-    xPlayerPos += dx*2;
-    player.style.left = xPlayerPos + 'px';
+    control();
+    frames = requestAnimationFrame(game);
 }
 
 window.addEventListener('load', inicia);

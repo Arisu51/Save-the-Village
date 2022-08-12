@@ -71,8 +71,8 @@ function mover() {
             } else {
                 player.src = 'img/pixil_5.png';
             }
-            player.classList.add('jump');
-            if (!jump) {
+            if (!jump && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))||(player.offsetTop < 121))) {
+                player.classList.add('jump');
 	            jump = true;
 	            setTimeout(() => {
 	                player.classList.remove('jump');

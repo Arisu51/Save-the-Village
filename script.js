@@ -4,6 +4,7 @@ var powerUp = false;
 
 //posições
 var xPlayerPos;
+var yPlayerPos;
 
 //direções
 var dx;
@@ -11,10 +12,14 @@ var frames;
 
 //sprites
 var spritePlayer;
+var jump = false;
+
+var andar = [550, 440, 330, 220, 110];
 
 function inicia() {
     dx = 0;
     xPlayerPos = 0;
+    yPlayerPos = andar[0];
     player = document.getElementById('player');
     spritePlayer = document.getElementsByClassName('spritePlayer');
     document.addEventListener('keydown', mover);
@@ -26,6 +31,7 @@ function inicia() {
 
 function control() {
     player.style.left = xPlayerPos + 'px';
+    player.style.top = yPlayerPos + 'px';
 }
 
 function jump() {
@@ -59,12 +65,40 @@ function mover() {
             break;
         case 40:
             break;
-        case 38:
+        case 38: //up
             if (powerUp) {
                 player.src = 'img/pixil_6.png';
             } else {
                 player.src = 'img/pixil_5.png';
-                player.classList.add('jump');
+            }
+            player.classList.add('jump');
+            if (!jump) {
+	            jump = true;
+	            setTimeout(() => {
+	                player.classList.remove('jump');
+	                jump = false;
+	                player.src = 'img/pixil_3.png';
+                    switch (yPlayerPos) {
+                        case andar[0]:
+                            yPlayerPos = andar[1];
+                            break;
+                        case andar[1]:
+                            yPlayerPos = andar[2];
+                            break;
+                        case andar[2]:
+                            yPlayerPos = andar[3];
+                            break;
+                        case andar[3]:
+                            yPlayerPos = andar[4];
+                            break;
+                        case andar[4]:
+                            yPlayerPos = andar[5];
+                            break;
+                    
+                        default:
+                            break;
+                    }
+	            }, 1000);
             }
             break;
         default:
@@ -85,9 +119,9 @@ function parar() {
         default:
             break;
     }
-    if (powerUp) {
+    if (powerUp && !jump) {
         player.src = 'img/pixil_4.png';
-    } else {
+    } else if(!jump){
         player.src = 'img/pixil_3.png';
     }
 }

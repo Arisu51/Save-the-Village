@@ -24,7 +24,10 @@
     }
 }
 .jump{
-    animation: jump 2s;
+    animation: jump 1s;
+}
+.fall{
+    animation: fall 1s;
 }
 .platform {
     position: absolute;

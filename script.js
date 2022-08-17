@@ -1,6 +1,6 @@
 //entidades
 var player;
-var powerUp = false;
+var powerUp = true;
 
 //posições
 var xPlayerPos;
@@ -71,13 +71,17 @@ function mover() {
             } else {
                 player.src = 'img/pixil_5.png';
             }
-            if (!jump && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))||(player.offsetTop < 121))) {
+            if (!jump && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop > 121))) {
                 player.classList.add('jump');
 	            jump = true;
 	            setTimeout(() => {
 	                player.classList.remove('jump');
 	                jump = false;
-	                player.src = 'img/pixil_3.png';
+                    if (powerUp) {
+                        player.src = 'img/pixil_4.png';
+                    } else {
+                        player.src = 'img/pixil_3.png';
+                    }
                     switch (yPlayerPos) {
                         case andar[0]:
                             yPlayerPos = andar[1];
@@ -99,6 +103,20 @@ function mover() {
                             break;
                     }
 	            }, 1000);
+            } else if (!jump){
+                player.classList.add('hjump');
+                jump = true;
+                setTimeout(() => {
+                    if (powerUp) {
+                        player.src = 'img/pixil_4.png';
+                    } else {
+                        player.src = 'img/pixil_3.png';
+                    }
+                }, 1000);
+                setTimeout(() => {
+                    player.classList.remove('hjump');
+                    jump = false;
+                }, 2000);
             }
             break;
         default:

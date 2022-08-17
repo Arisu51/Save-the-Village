@@ -29,11 +29,20 @@
     }
 
     50% {
-        transform: translateY(-60px);
+        transform: translateY(-50px);
     }
 
     100% {
         transform: translateY(0);
+    }
+}
+@keyframes fall{
+    0% {
+      transform: translateY(0);
+    }
+  
+    100% {
+        transform: translateY(110px);
     }
 }
 .jump{
@@ -41,6 +50,9 @@
 }
 .hjump{
     animation: hjump 2s;
+}
+.fall{
+    animation: fall 0.8s;
 }
 .platform {
     position: absolute;

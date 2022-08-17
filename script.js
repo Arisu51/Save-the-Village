@@ -13,6 +13,7 @@ var frames;
 //sprites
 var spritePlayer;
 var jump = false;
+var fall = false;
 
 var andar = [550, 440, 330, 220, 110];
 
@@ -32,10 +33,6 @@ function inicia() {
 function control() {
     player.style.left = xPlayerPos + 'px';
     player.style.top = yPlayerPos + 'px';
-}
-
-function jump() {
-
 }
 
 function mover() {
@@ -63,20 +60,49 @@ function mover() {
                 xPlayerPos += dx*5;
             }
             break;
-        case 40:
+        case 40: //down
+        if (!fall && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop < 510))) {
+                player.classList.add('fall');
+                fall = true;
+                jump = true;
+                setTimeout(() => {
+                    player.classList.remove('fall');
+                    fall = false;
+                    jump = false;
+                    switch (yPlayerPos) {
+                        case andar[1]:
+                            yPlayerPos = andar[0];
+                            break;
+                        case andar[2]:
+                            yPlayerPos = andar[1];
+                            break;
+                        case andar[3]:
+                            yPlayerPos = andar[2];
+                            break;
+                        case andar[4]:
+                            yPlayerPos = andar[3];
+                            break;
+                        case andar[5]:
+                            yPlayerPos = andar[4];
+                            break;
+                    }
+                }, 800);
+            }
             break;
         case 38: //up
-            if (powerUp) {
-                player.src = 'img/pixil_6.png';
-            } else {
-                player.src = 'img/pixil_5.png';
-            }
             if (!jump && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop > 121))) {
                 player.classList.add('jump');
 	            jump = true;
+                fall = true
+                if (powerUp && jump) {
+                    player.src = 'img/pixil_6.png';
+                } else {
+                    player.src = 'img/pixil_5.png';
+                }
 	            setTimeout(() => {
 	                player.classList.remove('jump');
 	                jump = false;
+                    fall = false;
                     if (powerUp) {
                         player.src = 'img/pixil_4.png';
                     } else {
@@ -98,14 +124,17 @@ function mover() {
                         case andar[4]:
                             yPlayerPos = andar[5];
                             break;
-                    
-                        default:
-                            break;
                     }
 	            }, 1000);
             } else if (!jump){
                 player.classList.add('hjump');
                 jump = true;
+                fall = true;
+                if (powerUp && jump) {
+                    player.src = 'img/pixil_6.png';
+                } else {
+                    player.src = 'img/pixil_5.png';
+                }
                 setTimeout(() => {
                     if (powerUp) {
                         player.src = 'img/pixil_4.png';
@@ -116,6 +145,7 @@ function mover() {
                 setTimeout(() => {
                     player.classList.remove('hjump');
                     jump = false;
+                    fall = false;
                 }, 2000);
             }
             break;
@@ -133,6 +163,11 @@ function parar() {
         case 39:
             dx = 0;
             xPlayerPos += dx*5;
+            if (powerUp) {
+                player.src = 'img/pixil_4.png';
+            } else {
+                player.src = 'img/pixil_3.png';
+            }
             break;
         default:
             break;

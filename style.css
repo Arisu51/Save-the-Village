@@ -14,6 +14,12 @@
     top: 550px;
     image-rendering: pixelated;
 }
+.shot{
+    width: 5px;
+    height: 5px;
+    background: #000;
+    position: absolute;
+}
 @keyframes jump{
     0% {
       transform: translateY(0);

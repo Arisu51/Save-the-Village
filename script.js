@@ -1,18 +1,22 @@
 //entidades
 var player;
+var enemy;
 var powerUp = true;
+
+//tamanhos
+var gameSizeL;
 
 //posições
 var xPlayerPos;
 var yPlayerPos;
 
 //direções
-var dx;
+var dx, de;
 var frames;
 var r;
+var side;
 
 //sprites
-var spritePlayer;
 var jump = false;
 var fall = false;
 
@@ -23,7 +27,8 @@ function inicia() {
     xPlayerPos = 0;
     yPlayerPos = andar[0];
     player = document.getElementById('player');
-    spritePlayer = document.getElementsByClassName('spritePlayer');
+    enemy = document.getElementsByClassName('frame');
+    gameSizeL = document.getElementById('game').offsetLeft;
     document.addEventListener('keydown', mover);
     document.addEventListener('keyup', parar);
     game();
@@ -34,6 +39,12 @@ function inicia() {
 function control() {
     player.style.left = xPlayerPos + 'px';
     player.style.top = yPlayerPos + 'px';
+}
+
+function enemyControl() {
+    if (enemy.offsetLeft > gameSizeL+300) {
+        console.log('esquerda');
+    }
 }
 
 function hJump() { //pulo alto
@@ -123,6 +134,7 @@ function down() {
         }
     }, 800);
 }
+
 function shot(x, y) { //poder
     var t = document.createElement('div');
     var att1 = document.createAttribute('class');
@@ -152,7 +164,7 @@ function mover() {
                 dx = -1;
                 xPlayerPos += dx*5;
             }
-            r = false;
+            r = -1;
             break;
         case 39: //right
             if (powerUp) {
@@ -164,7 +176,7 @@ function mover() {
                 dx = 1;
                 xPlayerPos += dx*5;
             }
-            r = true;
+            r = 1;
             break;
         case 40: //down
         if (!fall && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop < 510))) {
@@ -212,6 +224,7 @@ function parar() {
 
 function game(){
     control();
+    enemyControl();
     frames = requestAnimationFrame(game);
 }
 

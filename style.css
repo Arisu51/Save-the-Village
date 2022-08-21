@@ -14,11 +14,16 @@
     top: 550px;
     image-rendering: pixelated;
 }
+.frame{
+    position: absolute;
+    left: 20px;
+    top: 440px;
+}
 .shot{
+    position: absolute;
     width: 5px;
     height: 5px;
     background: #000;
-    position: absolute;
 }
 @keyframes jump{
     0% {

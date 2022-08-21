@@ -15,6 +15,37 @@ body{
     display: flex;
     justify-content: center;
 }
+button{
+	font-family: 'Press Start 2P', cursive;
+    font-size: 1.1em;
+	background: transparent;
+    color: #fff;
+    border: none;
+    margin: 0;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 1em;
+    
+}
+button:hover{
+    cursor: pointer;
+}
+button:active{
+    color:rgb(0, 89, 255);
+}
+#tittle{
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    text-align: center;
+    line-height: 1.2em;
+}
 #redes{
     display: inline;
     list-style-type: none;
@@ -29,9 +60,47 @@ a:hover{
     text-decoration: underline;
 }
 .icon{
-    width: 20px;
+    width: 30px;
+    margin: 5px;
 }
+ul{
+    position: absolute;
+    right: 80px;
+    bottom: 0;
+    padding-left: 0px;
+    margin:0;
+}
+li{
+    display:inline-block;
+}
+.pixil{
+    position: absolute;
+    height: 100px;
+    top: 490px;
+    image-rendering: pixelated;
+    left: 20px
+}
+@keyframes happy{
+    0% {
+        transform: translateY(0);
+        content: url("img/pixil_5.png");
+    }
 
+    50% {
+        transform: translateY(-50px);
+    }
+    
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+.happy{
+    animation: happy 3s infinite;
+}
 #game{
     position: relative;
     display: inline-flex;
@@ -42,6 +111,7 @@ a:hover{
 }
 #container{
     position: relative;
+    display: none;
 }
 #player{
     position: absolute;

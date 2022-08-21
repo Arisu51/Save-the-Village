@@ -15,6 +15,7 @@ body{
     display: flex;
     justify-content: center;
 }
+/*---menu---*/
 button{
 	font-family: 'Press Start 2P', cursive;
     font-size: 1.1em;
@@ -101,6 +102,7 @@ li{
 .happy{
     animation: happy 3s infinite;
 }
+/*---game---*/
 #game{
     position: relative;
     display: inline-flex;
@@ -113,6 +115,7 @@ li{
     position: relative;
     display: none;
 }
+/*entities*/
 #player{
     position: absolute;
     height: 40px;
@@ -170,6 +173,7 @@ li{
 .fall{
     animation: fall 0.8s;
 }
+/*map*/
 .platform {
     position: absolute;
     background: rgb(7, 160, 28);

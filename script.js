@@ -1,10 +1,11 @@
 //entidades
 var player;
 var enemy;
-var powerUp = true;
+var powerUp = false;
 
-//tamanhos
-var gameSizeL;
+//UI
+var gameUI;
+var menuUI;
 
 //posições
 var xPlayerPos;
@@ -15,6 +16,7 @@ var dx, de;
 var frames;
 var r;
 var side;
+var teste
 
 //sprites
 var jump = false;
@@ -22,16 +24,22 @@ var fall = false;
 
 var andar = [550, 440, 330, 220, 110];
 
-function inicia() {
+function play(){
+    menuUI.style.display = "none";
+    gameUI.style.display = "block";
     dx = 0;
     xPlayerPos = 0;
     yPlayerPos = andar[0];
-    player = document.getElementById('player');
-    enemy = document.getElementsByClassName('frame');
-    gameSizeL = document.getElementById('game').offsetLeft;
     document.addEventListener('keydown', mover);
     document.addEventListener('keyup', parar);
     game();
+}
+
+function start() {
+    player = document.getElementById('player');
+    enemy = document.getElementsByClassName('frame');
+    gameUI = document.getElementById('container');
+    menuUI = document.getElementById('menu');
 }
 
 //movimentação
@@ -39,12 +47,6 @@ function inicia() {
 function control() {
     player.style.left = xPlayerPos + 'px';
     player.style.top = yPlayerPos + 'px';
-}
-
-function enemyControl() {
-    if (enemy.offsetLeft > gameSizeL+300) {
-        console.log('esquerda');
-    }
 }
 
 function hJump() { //pulo alto
@@ -224,8 +226,7 @@ function parar() {
 
 function game(){
     control();
-    enemyControl();
     frames = requestAnimationFrame(game);
 }
 
-window.addEventListener('load', inicia);
+window.addEventListener('load', start);

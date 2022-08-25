@@ -15,8 +15,7 @@ var yPlayerPos;
 var dx, de;
 var frames;
 var r;
-var side;
-var teste
+var dl = [];
 
 //sprites
 var jump = false;
@@ -154,14 +153,11 @@ function shotControl() {
     for(let i=0; i<tam; i++) {
         if(shots[i]) {
             var pl = shots[i].offsetLeft;
-            if(r) {
-                pl += 5;
-            }else{
-                pl -= 5;
-            }
+            pl += dl[i];
             shots[i].style.left = pl + 'px';
             if(pl > 600 || pl < 0) {
                 shots[i].remove();
+                dl.shift();
             }
         }
     }
@@ -170,11 +166,6 @@ function shotControl() {
 function mover() {
     tecla = event.keyCode;
     switch (tecla) {
-        case 32: //space
-            if (powerUp && !jump) {
-                shot(xPlayerPos+16+2.5, yPlayerPos+29);
-            }
-            break;
         case 37: //left
             if (powerUp) {
                 player.src = 'img/pixil_2.png';
@@ -225,6 +216,16 @@ function parar() {
         case 39:
             dx = 0;
             xPlayerPos += dx*5;
+            break;
+        case 32:
+            if (powerUp && !jump) {
+                shot(xPlayerPos+16+2.5, yPlayerPos+29);
+            }
+            if(r) {
+                dl.push(5);
+            }else{
+                dl.push(-5);
+            }
             break;
         default:
             break;

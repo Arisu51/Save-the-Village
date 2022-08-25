@@ -1,7 +1,7 @@
 //entidades
 var player;
 var enemy;
-var powerUp = false;
+var powerUp = true;
 
 //UI
 var gameUI;
@@ -148,6 +148,25 @@ function shot(x, y) { //poder
     document.getElementById('container').appendChild(t);
 }
 
+function shotControl() {
+    let shots = document.getElementsByClassName('shot');
+    let tam = shots.length;
+    for(let i=0; i<tam; i++) {
+        if(shots[i]) {
+            var pl = shots[i].offsetLeft;
+            if(r) {
+                pl += 5;
+            }else{
+                pl -= 5;
+            }
+            shots[i].style.left = pl + 'px';
+            if(pl > 600 || pl < 0) {
+                shots[i].remove();
+            }
+        }
+    }
+}
+
 function mover() {
     tecla = event.keyCode;
     switch (tecla) {
@@ -166,7 +185,7 @@ function mover() {
                 dx = -1;
                 xPlayerPos += dx*5;
             }
-            r = -1;
+            r = false;
             break;
         case 39: //right
             if (powerUp) {
@@ -178,7 +197,7 @@ function mover() {
                 dx = 1;
                 xPlayerPos += dx*5;
             }
-            r = 1;
+            r = true;
             break;
         case 40: //down
         if (!fall && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop < 510))) {
@@ -206,19 +225,9 @@ function parar() {
         case 39:
             dx = 0;
             xPlayerPos += dx*5;
-            if (powerUp) {
-                player.src = 'img/pixil_4.png';
-            } else {
-                player.src = 'img/pixil_3.png';
-            }
             break;
         default:
             break;
-    }
-    if (powerUp && !jump) {
-        player.src = 'img/pixil_4.png';
-    } else if(!jump){
-        player.src = 'img/pixil_3.png';
     }
 }
 
@@ -226,6 +235,7 @@ function parar() {
 
 function game(){
     control();
+    shotControl();
     frames = requestAnimationFrame(game);
 }
 

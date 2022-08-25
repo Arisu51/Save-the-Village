@@ -66,6 +66,11 @@ function hJump() { //pulo alto
         } else {
             player.src = 'img/pixil_3.png';
         }
+        /*for (let i = 0; i < 4; i++) {
+            if (yPlayerPos == andar[i]) {
+                yPlayerPos = andar[i+1];
+            }
+        }*/
         switch (yPlayerPos) {
             case andar[0]:
                 yPlayerPos = andar[1];
@@ -78,9 +83,6 @@ function hJump() { //pulo alto
                 break;
             case andar[3]:
                 yPlayerPos = andar[4];
-                break;
-            case andar[4]:
-                yPlayerPos = andar[5];
                 break;
         }
     }, 1000);
@@ -116,22 +118,10 @@ function down() {
         player.classList.remove('fall');
         fall = false;
         jump = false;
-        switch (yPlayerPos) {
-            case andar[1]:
-                yPlayerPos = andar[0];
-                break;
-            case andar[2]:
-                yPlayerPos = andar[1];
-                break;
-            case andar[3]:
-                yPlayerPos = andar[2];
-                break;
-            case andar[4]:
-                yPlayerPos = andar[3];
-                break;
-            case andar[5]:
-                yPlayerPos = andar[4];
-                break;
+        for (let i = 1; i < andar.length; i++) {
+            if (yPlayerPos == andar[i]) {
+                yPlayerPos = andar[i-1];
+            }
         }
     }, 800);
 }
@@ -157,7 +147,7 @@ function shotControl() {
             shots[i].style.left = pl + 'px';
             if(pl > 600 || pl < 0) {
                 shots[i].remove();
-                dl.shift();
+                dl.splice(i, 1);
             }
         }
     }
@@ -221,9 +211,9 @@ function parar() {
             if (powerUp && !jump) {
                 shot(xPlayerPos+16+2.5, yPlayerPos+29);
             }
-            if(r) {
+            if(r && !jump) {
                 dl.push(5);
-            }else{
+            }else if (!jump){
                 dl.push(-5);
             }
             break;

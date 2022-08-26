@@ -1,7 +1,8 @@
 //entidades
 var player;
-var enemy;
 var powerUp = true;
+var jogo = null;
+var powerUp;
 
 //UI
 var gameUI;
@@ -31,12 +32,13 @@ function play(){
     yPlayerPos = andar[0];
     document.addEventListener('keydown', mover);
     document.addEventListener('keyup', parar);
+    jogo = true;
+    power();
     game();
 }
 
 function start() {
     player = document.getElementById('player');
-    enemy = document.getElementsByClassName('frame');
     gameUI = document.getElementById('container');
     menuUI = document.getElementById('menu');
 }
@@ -127,14 +129,14 @@ function down() {
 }
 
 function shot(x, y) { //poder
-    var t = document.createElement('div');
-    var att1 = document.createAttribute('class');
-    var att2 = document.createAttribute('style');
+    let t = document.createElement('div');
+    let att1 = document.createAttribute('class');
+    let att2 = document.createAttribute('style');
     att1.value = 'shot';
     att2.value = 'top:'+y+'px;left:'+x+'px;';
     t.setAttributeNode(att1);
     t.setAttributeNode(att2);
-    document.getElementById('container').appendChild(t);
+    gameUI.appendChild(t);
 }
 
 function shotControl() {
@@ -150,6 +152,25 @@ function shotControl() {
                 dl.splice(i, 1);
             }
         }
+    }
+}
+
+function power() {
+    let melon = false;
+    if(jogo) {
+        setInterval(() => {
+            if (!melon) {
+                let t = document.createElement('div');
+                let att1 = document.createAttribute('id');
+                let att2 = document.createAttribute('style');
+                att1.value = 'melons';
+                att2.value = 'top:'+(andar[Math.floor(Math.random()*andar.length)]+70)+'px;left:'+(Math.floor(Math.random()*560)+20)+'px;';
+                t.setAttributeNode(att1);
+                t.setAttributeNode(att2);
+                gameUI.insertBefore(t, gameUI.children[0]);
+                melon = true;
+            }
+        }, (Math.random()*3001)+1000);
     }
 }
 

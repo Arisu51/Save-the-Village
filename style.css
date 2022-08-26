@@ -122,6 +122,12 @@ li{
     top: 550px;
     image-rendering: pixelated;
 }
+#melons{
+    position:absolute;
+    height: 20px;
+    content: url("img/melon.png");
+    image-rendering: pixelated;
+}
 .frame{
     position: absolute;
     left: 20px;

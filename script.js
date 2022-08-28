@@ -1,8 +1,10 @@
 //entidades
 var player;
-var powerUp = true;
+var powerUp = false;
 var jogo = null;
 var powerUp;
+var divMelon;
+var melon;
 
 //UI
 var gameUI;
@@ -68,24 +70,10 @@ function hJump() { //pulo alto
         } else {
             player.src = 'img/pixil_3.png';
         }
-        /*for (let i = 0; i < 4; i++) {
+        for (let i = 4; i > -1; i--) {
             if (yPlayerPos == andar[i]) {
                 yPlayerPos = andar[i+1];
             }
-        }*/
-        switch (yPlayerPos) {
-            case andar[0]:
-                yPlayerPos = andar[1];
-                break;
-            case andar[1]:
-                yPlayerPos = andar[2];
-                break;
-            case andar[2]:
-                yPlayerPos = andar[3];
-                break;
-            case andar[3]:
-                yPlayerPos = andar[4];
-                break;
         }
     }, 1000);
 }
@@ -156,21 +144,36 @@ function shotControl() {
 }
 
 function power() {
-    let melon = false;
+    melon = false;
     if(jogo) {
-        setInterval(() => {
-            if (!melon) {
+        setTimeout(() => {
+            if (!melon && !powerUp) {
                 let t = document.createElement('div');
                 let att1 = document.createAttribute('id');
                 let att2 = document.createAttribute('style');
                 att1.value = 'melons';
-                att2.value = 'top:'+(andar[Math.floor(Math.random()*andar.length)]+70)+'px;left:'+(Math.floor(Math.random()*560)+20)+'px;';
+                att2.value = 'top:'+(andar[Math.floor(Math.random()*andar.length)])+'px;left:'+(Math.floor(Math.random()*300)+140)+'px;';
                 t.setAttributeNode(att1);
                 t.setAttributeNode(att2);
                 gameUI.insertBefore(t, gameUI.children[0]);
                 melon = true;
+                divMelon = document.getElementById('melons');
             }
-        }, (Math.random()*3001)+1000);
+        }, (Math.random()*20001)+10000);
+    }
+}
+
+function colisions(){
+    if (jump && (melon && (player.offsetTop == divMelon.offsetTop && (divMelon.offsetLeft+20 > player.offsetLeft && (divMelon.offsetLeft < player.offsetLeft+40 && player))))){
+        setTimeout(() => {
+	        divMelon.remove();
+	        melon = false;
+	        powerUp = true;
+	        setTimeout(() => {
+	            powerUp = false;
+                power();
+	        }, 20000);
+        }, 1000);
     }
 }
 
@@ -202,8 +205,13 @@ function mover() {
             r = true;
             break;
         case 40: //down
-        if (!fall && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop < 510))) {
+            if (!fall && (((player.offsetLeft > 58 && player.offsetLeft < 102)||(player.offsetLeft > 460 && player.offsetLeft < 502))&&(player.offsetTop < 510))) {
                 down();
+            }
+            if (!powerUp) {
+                player.src = 'img/pixil_3.png';
+            } else {
+                player.src = 'img/pixil_4.png'
             }
             break;
         case 38: //up
@@ -229,13 +237,15 @@ function parar() {
             xPlayerPos += dx*5;
             break;
         case 32:
-            if (powerUp && !jump) {
-                shot(xPlayerPos+16+2.5, yPlayerPos+29);
-            }
-            if(r && !jump) {
-                dl.push(5);
-            }else if (!jump){
-                dl.push(-5);
+            if (powerUp) {
+	            if (!jump) {
+	                shot(xPlayerPos+16+2.5, yPlayerPos+29);
+	            }
+	            if(r && !jump) {
+	                dl.push(5);
+	            }else if (!jump){
+	                dl.push(-5);
+	            }
             }
             break;
         default:
@@ -248,6 +258,7 @@ function parar() {
 function game(){
     control();
     shotControl();
+    colisions();
     frames = requestAnimationFrame(game);
 }
 

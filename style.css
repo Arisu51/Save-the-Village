@@ -2,7 +2,7 @@
 body{
 	font-family: 'Press Start 2P', cursive;
     color: #fff;
-    background-color: rgb(202, 202, 202);
+    background-color: rgb(155, 155, 155);
 }
 #v{
     position: absolute;
@@ -99,6 +99,17 @@ li{
         transform: translateY(0);
     }
 }
+@keyframes mel{
+    0%{
+        transform: translateY(-40px);
+    }
+    50%{
+        transform: translateY(-36px);
+    }
+    100%{
+        transform: translateY(-40px);
+    }
+}
 .happy{
     animation: happy 3s infinite;
 }
@@ -127,6 +138,7 @@ li{
     height: 20px;
     content: url("img/melon.png");
     image-rendering: pixelated;
+    animation: mel 1s infinite;
 }
 .frame{
     position: absolute;

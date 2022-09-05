@@ -37,8 +37,7 @@ function play(){
     jogo = true;
     power();
     game();
-    //frame();
-    frameControl();
+    frame();
 }
 
 function start() {
@@ -118,7 +117,7 @@ function down() {
     }, 800);
 }
 
-/*function frame() {
+function frame() {
     setInterval(() => {
 	    let t = document.createElement('img');
 	    let att1 = document.createAttribute('class');
@@ -139,16 +138,21 @@ function down() {
 	    t.setAttributeNode(att2);
 	    gameUI.appendChild(t);
     }, (Math.random()*3001)+1000);
-}*/
+}
 
 function frameControl(){
     let enemies = document.getElementsByClassName('frame');
     let tam = enemies.length;
     for(let i=0; i<tam; i++) {
-        if(enemies) {
-            var ppl = enemies[i].offsetLeft;
-            ppl++;
-            console.log(enemies);
+        if(enemies[i]) {
+            var pl = enemies[i].offsetLeft;
+            if(pl<300){
+                pl ++;
+            } else{
+                pl --;
+                enemies[i].style.transform = 'scaleX(-1)';
+            }
+            enemies[i].style.left = pl + 'px';
         }
     }
 }
@@ -296,6 +300,7 @@ function game(){
     control();
     shotControl();
     colisions();
+    frameControl();
     frames = requestAnimationFrame(game);
 }
 

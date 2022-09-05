@@ -37,6 +37,8 @@ function play(){
     jogo = true;
     power();
     game();
+    //frame();
+    frameControl();
 }
 
 function start() {
@@ -114,6 +116,41 @@ function down() {
             }
         }
     }, 800);
+}
+
+/*function frame() {
+    setInterval(() => {
+	    let t = document.createElement('img');
+	    let att1 = document.createAttribute('class');
+	    let att2 = document.createAttribute('style');
+	    att1.value = 'frame';
+        let left = lado();
+        
+        function lado () {
+	        let test = Math.floor(Math.random()*2);
+	        if (test>0) {
+	            return -32;
+	        } else {
+	            return 600;
+	        }
+	    }
+	    att2.value = 'top:'+(andar[Math.floor(Math.random()*andar.length)])+'px;left:'+left+'px;content:url("img/frame_1.png");';
+	    t.setAttributeNode(att1);
+	    t.setAttributeNode(att2);
+	    gameUI.appendChild(t);
+    }, (Math.random()*3001)+1000);
+}*/
+
+function frameControl(){
+    let enemies = document.getElementsByClassName('frame');
+    let tam = enemies.length;
+    for(let i=0; i<tam; i++) {
+        if(enemies) {
+            var ppl = enemies[i].offsetLeft;
+            ppl++;
+            console.log(enemies);
+        }
+    }
 }
 
 function shot(x, y) { //poder

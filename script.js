@@ -144,12 +144,12 @@ function frameControl(){
     let enemies = document.getElementsByClassName('frame');
     let tam = enemies.length;
     for(let i=0; i<tam; i++) {
+        var pl;
         if(enemies[i]) {
-            var pl = enemies[i].offsetLeft;
             if(pl<300){
-                pl ++;
+                pl += 1;
             } else{
-                pl --;
+                pl -= 1;
                 enemies[i].style.transform = 'scaleX(-1)';
             }
             enemies[i].style.left = pl + 'px';
